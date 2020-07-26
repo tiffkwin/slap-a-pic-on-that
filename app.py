@@ -90,5 +90,9 @@ def playlists(playlist_id):
         return redirect('/')
     return render_template('upload.html', playlist_id=playlist_id)
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
