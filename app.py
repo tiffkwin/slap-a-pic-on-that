@@ -13,7 +13,7 @@ Session(app)
 
 scope='user-read-email playlist-read-private playlist-read-collaborative ugc-image-upload playlist-modify-public playlist-modify-private'
 CACHE_PATH="cache.txt"
-REDIRECT_URI = 'http://127.0.0.1:5000'
+REDIRECT_URI = 'https://slap-a-pic-on-that.herokuapp.com/' if os.getenv('PORT') else 'http://127.0.0.1:5000'
 CLIENT_ID = os.getenv('SPOTIPY_CLIENT_ID')
 CLIENT_SECRET = os.getenv('SPOTIPY_CLIENT_SECRET')
 
