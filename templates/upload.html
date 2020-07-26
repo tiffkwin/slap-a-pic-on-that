@@ -1,0 +1,13 @@
+<!doctype html>
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+<section class="text-gray-500 bg-gray-900 body-font content-center items-center h-screen p-16">
+      <div class="lg:w-2/6 md:w-1/2 bg-gray-800 rounded-lg p-8 flex flex-col m-auto">
+        <h2 class="text-white text-lg font-medium title-font mb-5">Upload a Playlist Cover</h2>
+        <form method="post" enctype=multipart/form-data action="/upload/{{playlist_id}}">
+            <input id="image" type=file name="image" accept="image/*">
+            <input class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" id="submit_input" value="Submit Picture" type=submit style="margin-top: 0.5em;">
+          </form>
+      </div>
+    </div>
+  </section>

@@ -65,10 +65,8 @@ def sign_out():
     session.clear()
     return redirect('/')
 
-
-@app.route('/update/<playlist_id>')
-def playlists(playlist_id):
-    
+@app.route('/upload/<playlist_id>', methods=['POST'])
+def upload_file(playlist_id):
     if not session.get('token_info'):
         return redirect('/')
     else:
@@ -76,15 +74,21 @@ def playlists(playlist_id):
             'Authorization': 'Bearer {}'.format(session['token_info']),
             'Content-Type': 'image/jpeg'
         }
-        encoded_string=""
-        with open("IMG_9521.jpeg", "rb") as image_file:
-            encoded_string = base64.b64encode(image_file.read())
-            print(encoded_string)
+        if request.files:
+            image = request.files["image"]
+            image_string = base64.b64encode(image.read())
         request_url = 'https://api.spotify.com/v1/playlists/{}/images'.format(playlist_id)
         print(request_url)
-        r = requests.put(request_url, headers=headers, data=encoded_string)
+        r = requests.put(request_url, headers=headers, data=image_string)
         print(r)
     return redirect('/welcome')
+
+@app.route('/update/<playlist_id>')
+def playlists(playlist_id):
+    
+    if not session.get('token_info'):
+        return redirect('/')
+    return render_template('upload.html', playlist_id=playlist_id)
 
 if __name__ == '__main__':
     app.run(debug=True)
