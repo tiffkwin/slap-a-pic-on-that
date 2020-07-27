@@ -42,7 +42,11 @@ def index():
 
     if not session.get('token_info'):
         auth_url = auth_manager.get_authorize_url()
+        session['auth_url'] = auth_url
         return render_template("index.html", auth_url=auth_url)
+    else:
+        return redirect('/welcome')
+        
 
     
 @app.route('/welcome')
@@ -61,9 +65,13 @@ def welcome():
     return render_template('dashboard.html', playlists=playlists)
 
 @app.route('/sign_out')
-def sign_out():
+def error_500():
     session.clear()
     return redirect('/')
+
+@app.route('/500')
+def sign_out():
+    return render_template('500.html')
 
 @app.route('/upload/<playlist_id>', methods=['POST'])
 def upload_file(playlist_id):
